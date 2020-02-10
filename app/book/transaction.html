@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <title></title>
+
+        <!-- RESOURCES -->
+        <link rel='stylesheet' href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
+
+        <!-- Bootstrap Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script>let $ = require('jquery');</script>
+        <script>require('popper.js');</script>
+        <script>require('bootstrap');</script>
+        <script src='../include/db/db.js'></script>
+</head>
+<body>
+
+
+  <div class="container">
+
+    <h1>New Transaction</h1>
+    <hr>
+
+
+    <div class="bookIssue">
+      <form action="" >
+        <h4>Book Issue</h4>
+      
+        <div class="form-row" >
+          <div class="form-group col-md-4">
+            <label  for="tdate">Transation Date</label>
+            <input class="form-control" type="date" name='tdate'>
+          </div>
+        </div>    
+        
+
+        <div class="form-row" >
+          <div class="form-group col-md-4">
+            <label  for="bookId">Book No/ISBN</label>
+            <input class="form-control" type="number" name='bookId'>
+          </div>
+          <div class="form-group col-md-8">
+            <label  for="bookTitle">Book Title</label>
+            <input class="form-control" type="text" name='bookTitle'>
+          </div>
+        </div>    
+        
+
+
+        <div class="form-row" >
+          <div class="form-group col-md-4">
+            <label  for="memberId">Member No</label>
+            <input class="form-control" type="number" name='memberId'>
+          </div>
+          <div class="form-group col-md-8">
+            <label  for="memberName">Member Name</label>
+            <input class="form-control" type="text" name='memberName'>
+          </div>
+        </div>    
+
+        
+        <div class="form-group row" >
+          <div class="col-sm-12"><input class="form-control" type="submit" value='Issue Book'></div>
+        </div>    
+        
+        
+
+
+      </form>
+    </div>
+
+    <hr>
+    <hr>
+
+
+    <div class="bookReturn">
+      <form action="" >
+        <h4>Book Return</h4>
+      
+        <div class="form-row" >
+          <div class="form-group col-md-4">
+            <label  for="tdate">Transaction Date</label>
+            <input class="form-control" type="date" name='tdate'>
+          </div>
+        </div>    
+        
+
+
+        <div class="form-row" >
+          <div class="form-group col-md-4">
+            <label  for="bookId">Book No/ISBN</label>
+            <input class="form-control" type="number" name='bookId'>
+          </div>
+          <div class="form-group col-md-8">
+            <label  for="bookTitle">Book Title</label>
+            <input class="form-control" type="text" name='bookTitle'>
+          </div>
+        </div>    
+        
+
+
+        <div class="form-row" >
+          <div class="form-group col-md-4">
+            <label  for="memberId">Member No</label>
+            <input class="form-control" type="number" name='memberId'>
+          </div>
+          <div class="form-group col-md-8">
+            <label  for="memberName">Member Name</label>
+            <input class="form-control" type="text" name='memberName'>
+          </div>
+        </div>    
+        <div class="form-row" >
+        </div>    
+        
+        <div class="form-row" >
+          <div class="form-group col-md-6">
+            <label  for="fineAmt">Fine</label>
+            <input class="form-control" type="number" name='fineAmt'>
+          </div>
+        </div>    
+        
+        <div class="form-group row" >
+          <div class="col-sm-12"><input class="form-control" type="submit" value='Return Book' ></div>
+        </div>    
+        
+
+
+      </form>
+    </div>
+
+
+
+  </div>
+
+
+</body>
+</html>
