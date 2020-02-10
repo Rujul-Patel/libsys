@@ -1,7 +1,4 @@
 
-function connectDb()
-{
-
 var mysql = require('mysql');
 
 //Credentials to access your database
@@ -11,6 +8,9 @@ var connection = mysql.createConnection({
   password:'test',
   database:'library'
 });
+function connectDb()
+{
+
   connection.connect(function(err){
     //in case of error
     if(err){

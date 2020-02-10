@@ -5,13 +5,14 @@
       <title></title>
 
       <!-- RESOURCES -->
-      <link rel='stylesheet' href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
+      <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
 
       <!-- Bootstrap Optional JavaScript -->
       <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-      <script>let $ = require('jquery');</script>
-      <script>require('popper.js');</script>
-      <script>require('bootstrap');</script>
+      <script>let $ = require("jquery");</script>
+      <script>require("popper.js");</script>
+      <script>require("bootstrap");</script>
+      <script src="../include/db/db.js"></script>
 
 </head>
 <body>
@@ -20,35 +21,35 @@
 
     <h1>New Member Registration</h1>
     <hr>
-    <form action="">
+    <form id="memInp" >
 
     
       <div class="form-group row">
         <label class="col-sm-2" for="mName">Member Name</label>
-        <div class="col-sm-10"><input class="form-control" type="text" name='mName'></div>
+        <div class="col-sm-10"><input class="form-control" type="text" name="mName"></div>
       </div>
 
       
       <div class="form-group row">
         <label class="col-sm-2" for="addr">Address</label>
-        <div class="col-sm-10"><input class="form-control" type="text" name='addr'></div>
+        <div class="col-sm-10"><input class="form-control" type="text" name="addr"></div>
       </div>
 
       
       <div class="form-group row">
         <label class="col-sm-2" for="contact">Contact No</label>
-        <div class="col-sm-10"><input class="form-control" type="text" name='contact'></div>
+        <div class="col-sm-10"><input class="form-control" type="text" name="contact"></div>
       </div>
 
       
       <div class="form-group row">
         <label class="col-sm-2" for="email">Email Address</label>
-        <div class="col-sm-10"><input class="form-control" type="email" name='email'></div>
+        <div class="col-sm-10"><input class="form-control" type="email" name="email"></div>
       </div>
 
       
       <div class="form-group row">
-        <div class="col-sm-12"><input class="form-control" type="submit" value='Create Member'></div>
+        <div class="col-sm-12"><input class="form-control" type="submit" value="Create Member"></div>
       </div>
 
 
@@ -67,4 +68,79 @@
 
 
 </body>
+
+      <script>
+
+        $("#memInp").submit(function(event){
+          var values = $(this).serializeArray();
+          event.preventDefault();
+          
+          var inputs = {};
+          $.each(values,function(k,v){
+            inputs[v.name] = v.value;
+          });
+
+          console.log(inputs);
+
+          var qry = "insert into member(memberName,addr,contact,email) values('" + inputs["mName"]+"','" +inputs["addr"]+"','" +inputs["contact"]+"','" +inputs["email"]+"')";
+          console.log(qry);
+
+          dbQuery(qry);
+
+
+            
+
+
+        });
+          
+
+            
+
+    
+
+/*
+          var formData = $("#memInp").serializeArray().reduce(function (obj, item) {
+              if (obj[item.name] == null) {
+                  obj[item.name] = [];
+              } 
+              obj[item.name].push(item.value);
+              return obj;
+          }, {});
+
+          console.log(formData);
+*/
+      
+
+        
+            
+        
+
+
+
+        /*
+        document.querySelector("#memInp").addEventListener("submit",function(event){
+          event.preventDefault();
+
+          var values = $(this).serialize();
+          console.log(values);
+
+
+          /*
+          var $inps = $("#memInp:input");
+
+          console.log($inps);
+          var values = {};
+          $inps.each(function(){
+            values[this.name] = $(this).val();
+          });
+
+          console.log(values);
+
+
+
+        });
+
+*/
+
+      </script>
 </html>
