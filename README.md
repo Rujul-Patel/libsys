@@ -13,7 +13,16 @@ You can learn more about each of these components within the [Quick Start Guide]
 
 To clone and run this repository you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
 
+
+2. Run database.sql file in your database
+
+    A. Create your database from mysql 'create database library'
+    B. Import SQL File
+        mysql -uusername -p library < database.sql
+
+
 2.
+
 
 ```bash
 # Clone this repository
