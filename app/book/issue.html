@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <title>LibSys - Issue Book</title>
+
+        <!-- RESOURCES -->
+        <link rel='stylesheet' href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
+
+        <!-- Bootstrap Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script>let $ = require('jquery');</script>
+        <script>require('popper.js');</script>
+        <script>require('bootstrap');</script>
+        <script src='../include/db/db.js'></script>
+</head>
+<body>
+        <h1></h1>
+        <hr>
+        
+        
+        <div class="container">
+        
+          <!-- Member No and Member Name Selector --> 
+          <div class="form-row" >
+            <div class="form-group col-md-4">
+              <label  for="memNo">Member No</label>
+              <input class="form-control" type="number" id='memberNo' name='memNo'>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label  for="memName">Member Name</label>
+              <input class="form-control" type="text" name='tdate'>
+            </div>
+          </div>    
+          
+        </div>
+
+
+</body>
+</html>
