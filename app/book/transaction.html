@@ -24,7 +24,7 @@
 
 
     <div class="bookIssue">
-      <form action="" >
+      <form id='issueBook' >
         <h4>Book Issue</h4>
       
         <div class="form-row" >
@@ -75,7 +75,7 @@
 
 
     <div class="bookReturn">
-      <form action="" >
+      <form id='returnBook' >
         <h4>Book Return</h4>
       
         <div class="form-row" >
@@ -98,8 +98,12 @@
           </div>
         </div>    
         
+        <select id="" name="aa">
+          <option value="1">1</option>
+          <option value="2">2</option>
+        </select>
 
-
+          
         <div class="form-row" >
           <div class="form-group col-md-4">
             <label  for="memberId">Member No</label>
@@ -135,4 +139,61 @@
 
 
 </body>
+
+
+<script>
+  
+  
+          //Book Issue Form
+          $("#issueBook").submit(function(event){
+            var values = $(this).serializeArray();
+            event.preventDefault();
+            
+            var inputs = {};
+            $.each(values,function(k,v){
+              inputs[v.name] = v.value;
+            });
+  
+            console.log(inputs);
+  
+            var qry = "insert into transaction(issueDate,bookId,memberId,transClosed) values('" + inputs["tdate"]+"','" +inputs["bookId"]+"','" +inputs["memberId"]+"',0)";
+            console.log(qry);
+  
+            dbQuery(qry);
+  
+  
+              
+  
+  
+          });
+            
+
+        //Book Return Form
+        $("#returnBook").submit(function(event){
+          var values = $(this).serializeArray();
+          event.preventDefault();
+          
+          var inputs = {};
+          $.each(values,function(k,v){
+            inputs[v.name] = v.value;
+          });
+
+          console.log(inputs);
+
+//          var qry = "insert into member(memberName,addr,contact,email) values('" + inputs["mName"]+"','" +inputs["addr"]+"','" +inputs["contact"]+"','" +inputs["email"]+"')";
+  //        console.log(qry);
+//
+    //      dbQuery(qry);
+
+
+            
+
+
+        });
+          
+
+  
+</script>
+
+
 </html>

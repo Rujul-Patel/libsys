@@ -12,6 +12,7 @@
         <script>let $ = require('jquery');</script>
         <script>require('popper.js');</script>
         <script>require('bootstrap');</script>
+        <script src='../include/db/db.js'></script>
 </head>
 <body>
         <h1>Book List</h1>
@@ -21,22 +22,47 @@
         <div class="container">
         
 
-          <table class="table">
-            <tr>
-              <th>Sr No</th>
-              <th>Book Id</th>
-              <th>ISBN</th>
-              <th>Title</th>
-              <th>Author</th>
-              <th>Publication</th>
-              <th>No of Pages</th>
-              <th>No of Copies</th>
-            </tr>
+          <table class="table" id='bookList'> 
+            <thead>
+              <tr>
+                <th>Sr No</th>
+                <th>Book Id</th>
+                <th>ISBN</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Publication</th>
+                <th>No of Pages</th>
+                <th>No of Copies</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
           </table>
-        
+          
         
         </div>
+        
 
+        <script>
+          selectQry('select bookId,bookTitle,author from book_master',function(rows){
+            var tbl = '';
+
+            rows.forEach(function(row){
+              tbl += '<tr>';
+              tbl = tbl + '<td>' + row.bookId + '</td>';
+              tbl = tbl + '<td>' + row.bookTitle + '</td>';
+              tbl = tbl + '<td>' + row.author + '</td>';
+              tbl = tbl + '<td></td>';
+              tbl = tbl + '<td></td>';
+              tbl = tbl + '<td></td>';
+              tbl += '</tr>';
+            });
+
+            document.querySelector('#bookList > tbody').innerHTML = tbl;
+          });
+        
+        
+        </script>
 
 </body>
 </html>

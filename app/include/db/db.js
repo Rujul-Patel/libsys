@@ -38,6 +38,21 @@ function dbQuery(q)
 }
 
 
+function selectQry(q,callback)
+{
+  connection.query(q,function(err,rows,fields){
+    if(err){
+      console.log("Query Failed!!");
+      console.log(err);
+      return;
+    }
+
+    callback(rows);
+    console.log('Query Successfully executed');
+  });
+}
+
+
 function closeDb()
 {
   connection.end(function(){

@@ -21,30 +21,65 @@
 
 
 
-          <div class="dbutton"><a href="">
-            Issue Book
-          </a></div>
-          <div class="dbutton"><a href="">
-            Return Book
-          </a></div>
-          <div class="dbutton"><a href="">
-            Search Member
-          </a></div>
-          <div class="dbutton"><a href="">
-            Search Book
-          </a></div>
-          <div class="dbutton"><a href="">
-            New Member
-          </a></div>
-          <div class="dbutton"><a href="">
-            New Book
-          </a></div>
-        
-            
+          <button id='issueBook'>Issue Book</button>
+          <button id='returnBook'>Return Book</button>
+          <button id='memList'>Search Member</button>
+          <button id='bookList'>Search Book</button>
+          <button id='newMember'>New Member</button>
+          <button id='newBook'>New Book</button>
+
         
         
         </div>
 
 
+
 </body>
+
+<script>
+  
+  addWindowLink('issueBook','book/transaction.html');
+  addWindowLink('returnBook','book/transaction.html');
+  addWindowLink('memList','member/memberList.html');
+  addWindowLink('bookList','book/bookList.html');
+  addWindowLink('newMember','member/newMember.html');
+  addWindowLink('newBook','book/newBook.html');
+    
+
+
+  function addWindowLink(bId,winURL){
+    
+    var btn = document.getElementById(bId);
+
+    btn.addEventListener('click',function(event){
+
+      var electron = require('electron');
+      var BrowserWindow = electron.remote.BrowserWindow;
+
+      var path = require('path');
+      mPath = path.join('file://',__dirname,winURL);
+      console.log(mPath);
+
+
+      console.log(winURL);
+
+
+
+      let win = new BrowserWindow({width:1000,height:500,webPreferences:{nodeIntegration:true}});
+      win.on('close',function(){win = null});
+      win.loadURL(mPath);
+//      win.show();
+    });
+
+  }
+
+
+
+
+</script>
+
+
+
+
+
 </html>
