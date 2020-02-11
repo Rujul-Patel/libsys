@@ -1,10 +1,3 @@
-# electron-quick-start
-
-**Clone and run for a quick way to see Electron in action.**
-
-This is a minimal Electron application based on the [Quick Start Guide](https://electronjs.org/docs/tutorial/quick-start) within the Electron documentation.
-
-**Use this app along with the [Electron API Demos](https://electronjs.org/#get-started) app for API code examples to help you get started.**
 
 A basic Electron application needs just these files:
 
@@ -16,11 +9,15 @@ You can learn more about each of these components within the [Quick Start Guide]
 
 ## To Use
 
+1. Go to /app/db/db.js and change username,password and database name 
+
 To clone and run this repository you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
+
+2.
 
 ```bash
 # Clone this repository
-git clone https://github.com/electron/electron-quick-start
+git clone https://github.com/Rujul-Patel/libsys
 # Go into the repository
 cd electron-quick-start
 # Install dependencies
