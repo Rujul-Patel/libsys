@@ -5,7 +5,8 @@
         <title></title>
 
         <!-- RESOURCES -->
-        <link rel='stylesheet' href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
+        <link rel='stylesheet' href='../node_modules/bootstrap/dist/css/bootstrap.min.css'>
+        <link rel="stylesheet" href="include/css/theme.css">
 
         <!-- Bootstrap Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -21,12 +22,12 @@
 
 
 
-          <button id='issueBook'>Issue Book</button>
-          <button id='returnBook'>Return Book</button>
-          <button id='memList'>Search Member</button>
-          <button id='bookList'>Search Book</button>
-          <button id='newMember'>New Member</button>
-          <button id='newBook'>New Book</button>
+          <button class='btnLink' id='issueBook'>Issue Book</button>
+          <button class='btnLink' id='returnBook'>Return Book</button>
+          <button class='btnLink' id='memList'>Search Member</button>
+          <button class='btnLink' id='bookList'>Search Book</button>
+          <button class='btnLink' id='newMember'>New Member</button>
+          <button class='btnLink' id='newBook'>New Book</button>
 
         
         
@@ -38,8 +39,8 @@
 
 <script>
   
-  addWindowLink('issueBook','book/transaction.html');
-  addWindowLink('returnBook','book/transaction.html');
+  addWindowLink('issueBook','book/issue.html');
+  addWindowLink('returnBook','book/return.html');
   addWindowLink('memList','member/memberList.html');
   addWindowLink('bookList','book/bookList.html');
   addWindowLink('newMember','member/newMember.html');

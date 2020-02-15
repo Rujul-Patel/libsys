@@ -1,0 +1,40 @@
+body
+{
+  background-color:#45a29e;
+  color:firebrick;
+}
+
+.container
+{
+  padding:20px;
+}
+
+h1
+{
+  border:solid black thin;
+  border-bottom:solid black 5px;
+  background-color:#1f2833;
+  color:#66fcf1;
+  padding:5px 20px 20px 20px;
+}
+
+input[type=text]{
+  background-color:antiquewhite;
+}
+
+input[type=submit],table th
+{
+  background-color:#1f2833;
+  color:#66fcf1;
+}
+
+td{
+  background-color:#c5c6c7;
+}
+
+
+.btnLink
+{
+  padding:30px;
+  
+}
