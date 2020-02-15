@@ -17,11 +17,12 @@ To clone and run this repository you'll need [Git](https://git-scm.com) and [Nod
 2. Run database.sql file in your database
 
     A. Create your database from mysql 'create database library'
+    
     B. Import SQL File
         mysql -uusername -p library < database.sql
 
 
-2.
+3.
 
 
 ```bash
