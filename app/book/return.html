@@ -31,7 +31,7 @@
         <div class="form-row" >
           <div class="form-group col-md-4">
             <label  for="tdate">Return Date</label>
-            <input class="form-control" type="date" name='tdate'>
+            <input class="form-control" id='returnDate' type="date" name='tdate'>
           </div>
         </div>    
         
@@ -48,22 +48,28 @@
           </div>
         </div>    
 
-        <div class="form-row" >
-          <div class="form-group col-md-4">
-            <label  for="bookId">Book No/ISBN</label>
-            <!--input class="form-control" type="number" name='bookId'-->
-            <select class='form-control bookIdSel bookSel' name='bookId' >
-
-            </select>
-
-          </div>
-          <div class="form-group col-md-8">
-            <label  for="bookTitle">Book Title</label>
-            <!--input class="form-control" type="text" name='bookTitle'-->
-            <select id="" class="form-control bookNameSel bookSel" name="bookName"></select>
-          </div>
-        </div>    
         
+        <table id="bookList" class="table">
+          <thead>
+            <th>Return</th>
+            <th>Book Title</th>
+            <th>Issue Date</th>
+            <th>Due Date</th>
+            <th>Fine</th>
+            <th>Add </th>
+          </thead>
+          
+          <tbody>
+          
+          </tbody>
+        </table>
+
+
+
+        <h4>Total Fine : <span id='totalFine'>0</span></h4>
+
+
+
 
 
 
@@ -85,7 +91,7 @@
 
 
 <script>
-  
+  /*
   
           //Book Issue Form
           $("#returnBook").submit(function(event){
@@ -105,22 +111,80 @@
             dbQuery(qry);
           });
             
-
+*/
           
 
-          function addAutoSelector(sel){
+          //Add Event Listener to Member Selector
+          var sel='.memberSel';
+          $(sel).change(function(event){
+            console.log('CHG : ' + this.value);
+            
+            //Get the Current Entered Date to Calculate Fine
+            var returnDate = new Date($('#returnDate').val());
+            console.log(returnDate);
 
-            $(sel).change(function(event){
-              console.log('CHG : ' + this.value);
-              $(sel).val(this.value);
+
+            //1. Bind Changes with Id/ Name selector
+            $(sel).val(this.value);
+            
+
+ //           2. Show Books Issued By Member, If Any!!
+              selectQry('select t.transId,bm.bookId,bm.bookTitle,t.issueDate,DATE_ADD(t.issueDate,INTERVAL +7 DAY) as dueDate from book_master bm inner join transaction t on t.bookId = bm.bookId and t.memberId = '+ this.value +' and t.transClosed = 0',function(rows){
+
+                var dtl = '';
+                var indx = 1;
+                rows.forEach(function(row){
+                  dtl = dtl + '<tr><td><input class="form-control returnCbox" type="checkbox" onclick="addFine()" name=transList value=' + row.transId + '></td>';
+                  dtl = dtl + '<td>' + row.bookTitle + '</td>';
+                  dtl = dtl + '<td>' + row.issueDate + '</td>';
+                  dtl = dtl + '<td>' + row.dueDate + '</td>';
+
+                  var tDue = new Date(row.dueDate);
+                  var tFine = 0;
+                  tFine = (returnDate.getTime() - tDue.getTime())/(1000 * 3600 * 24);
+                  if(tFine < 1)
+                    tFine = 0;
+
+
+
+
+                  dtl = dtl + '<td class=fineAmt><input class="form-control fineList" type="text" name=fineList value=' + tFine + '></td>';
+                });
+
+                document.querySelector('#bookList>tbody').innerHTML = dtl;
+
+              });
+    
+
+
+          });
+
+
+          function addFine()
+          {
+
+            var totalFine = 0;
+            $('#bookList>tbody').find('tr').each(function () {
+                var row = $(this);
+                console.log('New Row');
+                if (row.find('input[type="checkbox"]').is(':checked')) {
+                  var tfine = row.find('input[type="text"]').val();
+
+                  tfine *= 1;
+                  totalFine += tfine;
+                }
             });
 
+            console.log(totalFine);  
+
+
+            $('#totalFine').text(totalFine);
           }
+        
+          function addReturnBook(transId){
 
-
-          addAutoSelector('.bookSel');
-          addAutoSelector('.memberSel');
-
+            console.log('Return' + transId);
+          }
 
 
 
@@ -130,36 +194,45 @@
         $("#returnBook").submit(function(event){
           var values = $(this).serializeArray();
           event.preventDefault();
+          console.log(values);
+
           
           var inputs = {};
+          var chkBox = [];
+          var finelist = [];
           $.each(values,function(k,v){
+            if(v.name =='transList')
+              chkBox.push(v.value);
+            if(v.name =='fineList')
+              finelist.push(v.value);
             inputs[v.name] = v.value;
           });
-
+          inputs['transList'] = chkBox;
+          inputs['fineList'] = finelist;
+            
+          console.log(chkBox);
           console.log(inputs);
+
+          inputs['transList'].forEach(function(element,index){
+
+
+
+            var qry = 'update transaction set returnDate="'+ inputs['tdate'] + '",finePaid='+inputs['fineList'][index] + ',transClosed=1 where transId = ' + element; 
+            console.log(qry);
+            dbQuery(qry);  
+
+          })  
+
+
+
 
 
         });
         
 
 
-        selectQry('select bookId,bookTitle from book_master',function(rows){
-          var optId = '';
-          var optName = '';
 
-          rows.forEach(function(row){
-            optId += '<option value=' + row.bookId + '>' + row.bookId + '</option>';
-            optName += '<option value=' + row.bookId + '>' + row.bookTitle + '</option>';
-          });
-
-          document.querySelector('.bookIdSel').innerHTML = optId;
-          document.querySelector('.bookNameSel').innerHTML = optName;
-
-
-        });
-    
-
-
+        //Fill Member Combo Box
         selectQry('select memberId,memberName from member',function(rows){
           var optId = '';
           var optName = '';

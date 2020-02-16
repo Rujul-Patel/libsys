@@ -26,13 +26,13 @@
           <table class="table" id='bookList'> 
             <thead>
               <tr>
-                <th>Sr No</th>
+              
                 <th>Book Id</th>
-                <th>ISBN</th>
                 <th>Title</th>
                 <th>Author</th>
                 <th>Publication</th>
-                <th>No of Pages</th>
+                <th>Publication Year</th>
+                <th>Genre</th>
                 <th>No of Copies</th>
               </tr>
             </thead>
@@ -45,7 +45,7 @@
         
 
         <script>
-          selectQry('select bookId,bookTitle,author from book_master',function(rows){
+          selectQry('select bookId,bookTitle,author,publicationId,publicationYear,genre,qty from book_master',function(rows){
             var tbl = '';
 
             rows.forEach(function(row){
@@ -53,11 +53,11 @@
               tbl = tbl + '<td>' + row.bookId + '</td>';
               tbl = tbl + '<td>' + row.bookTitle + '</td>';
               tbl = tbl + '<td>' + row.author + '</td>';
-              tbl = tbl + '<td></td>';
-              tbl = tbl + '<td></td>';
-              tbl = tbl + '<td></td>';
-              tbl = tbl + '<td></td>';
-              tbl = tbl + '<td></td>';
+              tbl = tbl + '<td>' + row.publicationId + '</td>';
+              tbl = tbl + '<td>' + row.publicationYear + '</td>';
+              tbl = tbl + '<td>' + row.genre + '</td>';
+              tbl = tbl + '<td>' + row.qty + '</td>';
+
               tbl += '</tr>';
             });
 

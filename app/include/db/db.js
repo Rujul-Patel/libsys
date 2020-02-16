@@ -6,7 +6,8 @@ var connection = mysql.createConnection({
   host:'localhost',
   user:'root',
   password:'test',
-  database:'library'
+  database:'library',
+  dateStrings:true
 });
 function connectDb()
 {
@@ -30,10 +31,12 @@ function dbQuery(q)
     if(err){
       console.log("Query Failed!! Error");
       console.log(err);
-      return;
+      return 0;
     }
 
     console.log('Query Successfull');
+    alert('Successfull');
+    return 1;
   });
 }
 

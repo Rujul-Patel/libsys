@@ -16,243 +16,56 @@
         <script src='../include/db/db.js'></script>
 </head>
 <body>
-
-
-  <div class="container">
-
-    <h1>New Transaction</h1>
-    <hr>
-
-
-    <div class="bookIssue">
-      <form id='issueBook' >
-        <h4>Book Issue</h4>
-      
-        <div class="form-row" >
-          <div class="form-group col-md-4">
-            <label  for="tdate">Transation Date</label>
-            <input class="form-control" type="date" name='tdate'>
-          </div>
-        </div>    
-        
-
-        <div class="form-row" >
-          <div class="form-group col-md-4">
-            <label  for="bookId">Book No/ISBN</label>
-            <!--input class="form-control" type="number" name='bookId'-->
-            <select class='form-control bookIdSel bookSel' name='bookId' >
-
-            </select>
-
-          </div>
-          <div class="form-group col-md-8">
-            <label  for="bookTitle">Book Title</label>
-            <!--input class="form-control" type="text" name='bookTitle'-->
-            <select id="" class="form-control bookNameSel bookSel" name="bookName"></select>
-          </div>
-        </div>    
-        
-
-
-        <div class="form-row" >
-          <div class="form-group col-md-4">
-            <label  for="memberId">Member No</label>
-            <select id="" class="form-control memIdSel memberSel" name="memberId"></select>
-          </div>
-          <div class="form-group col-md-8">
-            <label  for="memberName">Member Name</label>
-            <select id="" class="form-control memNameSel memberSel" name="memberName"></select>
-          </div>
-        </div>    
-
-        
-        <div class="form-group row" >
-          <div class="col-sm-12"><input class="form-control" type="submit" value='Issue Book'></div>
-        </div>    
+        <h1>Transaction History<h1>
+        <hr>
         
         
-
-
-      </form>
-    </div>
-
-    <hr>
-    <hr>
-
-
-    <div class="bookReturn">
-      <form id='returnBook' >
-        <h4>Book Return</h4>
-      
-        <div class="form-row" >
-          <div class="form-group col-md-4">
-            <label  for="tdate">Transaction Date</label>
-            <input class="form-control" type="date" name='tdate'>
-          </div>
-        </div>    
+        <div class="container">
         
 
-
-        <div class="form-row" >
-          <div class="form-group col-md-4">
-            <label  for="bookId">Book No/ISBN</label>
-            <input class="form-control" type="number" name='bookId'>
-          </div>
-          <div class="form-group col-md-8">
-            <label  for="bookTitle">Book Title</label>
-            <input class="form-control" type="text" name='bookTitle'>
-          </div>
-        </div>    
-        
-        <select id="" name="aa">
-          <option value="1">1</option>
-          <option value="2">2</option>
-        </select>
-
+          <table class="table" id='bookList'> 
+            <thead>
+              <tr>
+              
+                <th>Book Id</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Publication</th>
+                <th>Publication Year</th>
+                <th>Genre</th>
+                <th>No of Copies</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
           
-        <div class="form-row" >
-          <div class="form-group col-md-4">
-            <label  for="memberId">Member No</label>
-            <input class="form-control" type="number" name='memberId'>
-          </div>
-          <div class="form-group col-md-8">
-            <label  for="memberName">Member Name</label>
-            <input class="form-control" type="text" name='memberName'>
-          </div>
-        </div>    
-        <div class="form-row" >
-        </div>    
         
-        <div class="form-row" >
-          <div class="form-group col-md-6">
-            <label  for="fineAmt">Fine</label>
-            <input class="form-control" type="number" name='fineAmt'>
-          </div>
-        </div>    
-        
-        <div class="form-group row" >
-          <div class="col-sm-12"><input class="form-control" type="submit" value='Return Book' ></div>
-        </div>    
+        </div>
         
 
+        <script>
+          selectQry('select bookId,bookTitle,author,publicationId,publicationYear,genre,qty from book_master',function(rows){
+            var tbl = '';
 
-      </form>
-    </div>
+            rows.forEach(function(row){
+              tbl += '<tr>';
+              tbl = tbl + '<td>' + row.bookId + '</td>';
+              tbl = tbl + '<td>' + row.bookTitle + '</td>';
+              tbl = tbl + '<td>' + row.author + '</td>';
+              tbl = tbl + '<td>' + row.publicationId + '</td>';
+              tbl = tbl + '<td>' + row.publicationYear + '</td>';
+              tbl = tbl + '<td>' + row.genre + '</td>';
+              tbl = tbl + '<td>' + row.qty + '</td>';
 
+              tbl += '</tr>';
+            });
 
-
-  </div>
-
+            document.querySelector('#bookList > tbody').innerHTML = tbl;
+          });
+        
+        
+        </script>
 
 </body>
-
-
-<script>
-  
-  
-          //Book Issue Form
-          $("#issueBook").submit(function(event){
-            var values = $(this).serializeArray();
-            event.preventDefault();
-            
-            var inputs = {};
-            $.each(values,function(k,v){
-              inputs[v.name] = v.value;
-            });
-  
-            console.log(inputs);
-  
-            var qry = "insert into transaction(issueDate,bookId,memberId,transClosed) values('" + inputs["tdate"]+"','" +inputs["bookId"]+"','" +inputs["memberId"]+"',0)";
-            console.log(qry);
-  
-            dbQuery(qry);
-  
-  
-              
-  
-  
-          });
-            
-
-          
-
-          function addAutoSelector(sel){
-
-            $(sel).change(function(event){
-              console.log('CHG : ' + this.value);
-              $(sel).val(this.value);
-            });
-
-          }
-
-
-          addAutoSelector('.bookSel');
-          addAutoSelector('.memberSel');
-
-
-
-
-
-
-        //Book Return Form
-        $("#returnBook").submit(function(event){
-          var values = $(this).serializeArray();
-          event.preventDefault();
-          
-          var inputs = {};
-          $.each(values,function(k,v){
-            inputs[v.name] = v.value;
-          });
-
-          console.log(inputs);
-
-//          var qry = "insert into member(memberName,addr,contact,email) values('" + inputs["mName"]+"','" +inputs["addr"]+"','" +inputs["contact"]+"','" +inputs["email"]+"')";
-  //        console.log(qry);
-//
-    //      dbQuery(qry);
-
-
-            
-
-
-        });
-        
-
-
-        selectQry('select bookId,bookTitle from book_master',function(rows){
-          var optId = '';
-          var optName = '';
-
-          rows.forEach(function(row){
-            optId += '<option value=' + row.bookId + '>' + row.bookId + '</option>';
-            optName += '<option value=' + row.bookId + '>' + row.bookTitle + '</option>';
-          });
-
-          document.querySelector('.bookIdSel').innerHTML = optId;
-          document.querySelector('.bookNameSel').innerHTML = optName;
-
-
-        });
-    
-
-
-        selectQry('select memberId,memberName from member',function(rows){
-          var optId = '';
-          var optName = '';
-
-          rows.forEach(function(row){
-            optId += '<option value=' + row.memberId + '>' + row.memberId + '</option>';
-            optName += '<option value=' + row.memberId + '>' + row.memberName + '</option>';
-          });
-
-          document.querySelector('.memIdSel').innerHTML = optId;
-          document.querySelector('.memNameSel').innerHTML = optName;
-
-
-        });
-    
-
-</script>
-
-
 </html>
