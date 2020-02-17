@@ -27,11 +27,14 @@
           <table class="table" id='bookIssueList'> 
             <thead>
               <tr>
+                <th>Return Date</th>
+                <th>Due Date</th>
                 <th>Issue Date</th>
-                <th>Book Title</th>
-                <th>Member No</th>
+                <th>Fine</th>
+                <th>Book Name</th>
                 <th>Member Name</th>
-                <th>Status</th>
+
+
               </tr>
             </thead>
             <tbody>
@@ -43,17 +46,18 @@
         
 
         <script>
-          var issueQry = ' select t.issueDate,b.bookTitle,m.memberId,m.memberName,if(t.transClosed=1,"Returned","Pending") as stat from book_master b inner join transaction t on b.bookId = t.bookId inner join member m on m.memberId = t.memberId order by issueDate desc';
+          var issueQry = ' select t.returnDate,DATE_ADD(t.issueDate,INTERVAL +7 DAY) as dueDate,t.issueDate,t.finePaid,b.bookTitle,m.memberName from book_master b inner join transaction t on b.bookId = t.bookId inner join member m on m.memberId = t.memberId and t.transClosed = 1 order by returnDate desc';
           selectQry(issueQry,function(rows){
             var tbl = '';
 
             rows.forEach(function(row){
               tbl += '<tr>';
+              tbl = tbl + '<td>' + row.returnDate + '</td>';
+              tbl = tbl + '<td>' + row.dueDate + '</td>';
               tbl = tbl + '<td>' + row.issueDate + '</td>';
+              tbl = tbl + '<td>' + row.finePaid + '</td>';
               tbl = tbl + '<td>' + row.bookTitle + '</td>';
-              tbl = tbl + '<td>' + row.memberId + '</td>';
               tbl = tbl + '<td>' + row.memberName + '</td>';
-              tbl = tbl + '<td>' + row.stat + '</td>';
 
               tbl += '</tr>';
             });

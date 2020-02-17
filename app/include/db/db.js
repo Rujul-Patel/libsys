@@ -25,7 +25,7 @@ function connectDb()
 }
 
 
-function dbQuery(q)
+function dbQuery(q,flg)
 {
   connection.query(q,function(err,rows,fields){
     if(err){
@@ -35,7 +35,7 @@ function dbQuery(q)
     }
 
     console.log('Query Successfull');
-    alert('Successfull');
+    if(flg) alert('Successfull');
     return 1;
   });
 }
@@ -43,6 +43,7 @@ function dbQuery(q)
 
 function selectQry(q,callback)
 {
+  console.log(q);
   connection.query(q,function(err,rows,fields){
     if(err){
       console.log("Query Failed!!");

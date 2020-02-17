@@ -89,7 +89,7 @@
           var qry = "insert into book_master(bookId,bookTitle,author,qty,genre,publicationId,publicationYear) values('" + inputs["isbn"]+"','" +inputs["bookTitle"]+"','" +inputs["authors"]+"','" + inputs["qty"] + "','" + inputs["genre"] + "','" + inputs["publication"] + "','" + inputs["pubYear"] + "')";
           console.log(qry);
 
-          var status = dbQuery(qry)
+          var status = dbQuery(qry,1);
 
 
             

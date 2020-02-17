@@ -31,7 +31,7 @@
         <div class="form-row" >
           <div class="form-group col-md-4">
             <label  for="tdate">Transation Date</label>
-            <input class="form-control" type="date" name='tdate'>
+            <input class="form-control" id='returnDate' type="date" name='tdate'>
           </div>
         </div>    
         
@@ -84,6 +84,17 @@
 
 <script>
   
+
+          $(document).ready(function(){
+
+            var dt = new Date;
+            var mt = dt.getMonth() + 1;
+            if(mt < 10)
+              mt = '0' + mt;
+            var a = dt.getFullYear() + '-' + mt  + '-' + dt.getDate()
+            $('#returnDate').val(a);
+            
+          });           
   
           //Book Issue Form
           $("#issueBook").submit(function(event){
@@ -97,10 +108,11 @@
   
             console.log(inputs);
   
+            dbQuery("update book_master set qty = qty - 1 where bookId = " + inputs['bookId'],0 );
             var qry = "insert into transaction(issueDate,bookId,memberId,transClosed) values('" + inputs["tdate"]+"','" +inputs["bookId"]+"','" +inputs["memberId"]+"',0)";
             console.log(qry);
   
-            dbQuery(qry);
+            dbQuery(qry,1);
           });
             
 
@@ -141,7 +153,7 @@
         
 
 
-        selectQry('select bookId,bookTitle from book_master',function(rows){
+selectQry('select bookId,bookTitle from book_master where qty > 0',function(rows){
           var optId = '';
           var optName = '';
 

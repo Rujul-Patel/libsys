@@ -40,7 +40,7 @@
         <div class="form-row" >
           <div class="form-group col-md-4">
             <label  for="memberId">Member No</label>
-            <select id="" class="form-control memIdSel memberSel" name="memberId"></select>
+            <select id="" class="form-control memIdSel memberSel"  id='tmemId' name="memberId"></select>
           </div>
           <div class="form-group col-md-8">
             <label  for="memberName">Member Name</label>
@@ -113,6 +113,18 @@
             
 */
           
+          $(document).ready(function(){
+
+            var dt = new Date;
+            var mt = dt.getMonth() + 1;
+            if(mt < 10)
+              mt = '0' + mt;
+            var a = dt.getFullYear() + '-' + mt  + '-' + dt.getDate()
+            $('#returnDate').val(a);
+            
+          });           
+
+
 
           //Add Event Listener to Member Selector
           var sel='.memberSel';
@@ -132,10 +144,10 @@
               selectQry('select t.transId,bm.bookId,bm.bookTitle,t.issueDate,DATE_ADD(t.issueDate,INTERVAL +7 DAY) as dueDate from book_master bm inner join transaction t on t.bookId = bm.bookId and t.memberId = '+ this.value +' and t.transClosed = 0',function(rows){
 
                 var dtl = '';
-                var indx = 1;
+                var indx = 0;
                 rows.forEach(function(row){
-                  dtl = dtl + '<tr><td><input class="form-control returnCbox" type="checkbox" onclick="addFine()" name=transList value=' + row.transId + '></td>';
-                  dtl = dtl + '<td>' + row.bookTitle + '</td>';
+                  dtl = dtl + '<tr><td><input class="form-control returnCbox" type="checkbox" onclick="addFine()" name=rIndx value=' + indx + '></td>';
+                  dtl = dtl + '<td><input type=hidden name=rBookId value=' + row.bookId + '><input type=hidden name=transList value=' + row.transId + '>'  + row.bookTitle + '</td>';
                   dtl = dtl + '<td>' + row.issueDate + '</td>';
                   dtl = dtl + '<td>' + row.dueDate + '</td>';
 
@@ -147,7 +159,7 @@
 
 
 
-
+                  indx++;
                   dtl = dtl + '<td class=fineAmt><input class="form-control fineList" type="text" name=fineList value=' + tFine + '></td>';
                 });
 
@@ -200,26 +212,34 @@
           var inputs = {};
           var chkBox = [];
           var finelist = [];
+          var bookList = [];
+          var indx = [];
           $.each(values,function(k,v){
             if(v.name =='transList')
               chkBox.push(v.value);
             if(v.name =='fineList')
               finelist.push(v.value);
+            if(v.name =='rBookId')
+              bookList.push(v.value);
+            if(v.name =='rIndx')
+              indx.push(v.value);
+
             inputs[v.name] = v.value;
           });
           inputs['transList'] = chkBox;
           inputs['fineList'] = finelist;
-            
+          inputs['rBookId'] = bookList;
+          inputs['rIndx'] = indx;   
+          
           console.log(chkBox);
           console.log(inputs);
 
-          inputs['transList'].forEach(function(element,index){
 
-
-
-            var qry = 'update transaction set returnDate="'+ inputs['tdate'] + '",finePaid='+inputs['fineList'][index] + ',transClosed=1 where transId = ' + element; 
+          inputs['rIndx'].forEach(function(element,index){
+            dbQuery('update book_master set qty = qty + 1 where bookId = ' + inputs['rBookId'][element]);
+            var qry = 'update transaction set returnDate="'+ inputs['tdate'] + '",finePaid='+inputs['fineList'][element] + ',transClosed=1 where transId = ' + inputs['transList'][element]; 
             console.log(qry);
-            dbQuery(qry);  
+            dbQuery(qry,1);  
 
           })  
 
