@@ -27,10 +27,9 @@ CREATE TABLE `book_master` (
   `bookTitle` varchar(100) DEFAULT NULL,
   `author` varchar(200) DEFAULT NULL,
   `qty` int(11) DEFAULT NULL,
-  `publicationId` int(11) DEFAULT NULL,
-  `genre` int(11) DEFAULT NULL,
-  `no_pages` int(11) DEFAULT NULL,
-  `qtyAvailForIssue` int(11) DEFAULT NULL,
+  `publicationId` varchar(100) DEFAULT NULL,
+  `genre` varchar(100) DEFAULT NULL,
+  `publicationYear` int(11) DEFAULT NULL,
   PRIMARY KEY (`bookId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -41,7 +40,7 @@ CREATE TABLE `book_master` (
 
 LOCK TABLES `book_master` WRITE;
 /*!40000 ALTER TABLE `book_master` DISABLE KEYS */;
-INSERT INTO `book_master` VALUES (1,'Sherlock Holmes','Sir Conan Doyle',NULL,NULL,NULL,NULL,NULL),(2,'PHP ','ABC',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `book_master` VALUES (1,'Learning PHP, MySQL and Javascript','Robin Nixon',2,'O Reilly Media','Computers',2018),(2,'C Programming Language','Brian W. Kernighan , Dennis M. Ritchie',5,'Prentice Hall','Computers',1988),(3,'The Hound of Baskervilles','Sir Arthor Conan Doyle',2,'Independent','Mystery',1990),(4,'The Story of my Life','Helen Keller',5,'Penguin','Autobiography',1996),(5,'Magic of Thinking Big','David J Schwartz',1,'Fireside','Non Fiction',1987),(6,'Networking All in one for Dummies','Doug Lowe',3,'For Dummies','Computers',2018),(7,'Wings of Fire ','APJ Abdul Kalam, Arun Tiwari',4,'Sangam Books','Biography',1999);
 /*!40000 ALTER TABLE `book_master` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,7 +81,7 @@ CREATE TABLE `member` (
   `email` varchar(200) DEFAULT NULL,
   `contact` int(11) DEFAULT NULL,
   PRIMARY KEY (`memberId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +90,7 @@ CREATE TABLE `member` (
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` VALUES (1,'Rujul Patel','Surat','rujul@gmail.com',99889988);
+INSERT INTO `member` VALUES (1,'Rujul','Pal','rujul@gmail.com',9998989),(2,'Vishwas','Piplod','vishwas@gmail.com',89798788),(3,'Shrutik','Bhatar','shrutik@gmail.com',8797987),(4,'Shubham','Vesu','shubham@gmail.com',80809809),(5,'Kevin','Varachha','kevin@gmail.com',9792798),(6,'Fenish','Sayan','fenish@gmail.com',78979798);
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -111,7 +110,7 @@ CREATE TABLE `transaction` (
   `finePaid` decimal(5,2) DEFAULT NULL,
   `transClosed` int(11) DEFAULT NULL,
   PRIMARY KEY (`transId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -120,7 +119,7 @@ CREATE TABLE `transaction` (
 
 LOCK TABLES `transaction` WRITE;
 /*!40000 ALTER TABLE `transaction` DISABLE KEYS */;
-INSERT INTO `transaction` VALUES (1,1,1,'2020-02-08',NULL,NULL,0);
+INSERT INTO `transaction` VALUES (1,3,1,'2020-01-25','2020-02-05',4.00,1),(2,2,1,'2020-01-26','2020-02-15',100.00,1),(3,5,1,'2020-02-03','2020-02-05',0.00,1),(4,6,2,'2020-02-05','2020-02-15',100.00,1),(5,7,3,'2020-01-31',NULL,NULL,0),(6,1,3,'2019-06-24',NULL,NULL,0);
 /*!40000 ALTER TABLE `transaction` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -133,4 +132,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-11 18:38:51
+-- Dump completed on 2020-02-17 20:39:03
