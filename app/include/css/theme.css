@@ -1,6 +1,7 @@
+
 body
 {
-  background-color:#45a29e;
+  background-color:#d7cec7;
   color:firebrick;
 }
 
@@ -12,29 +13,74 @@ body
 h1
 {
   border:solid black thin;
-  border-bottom:solid black 5px;
-  background-color:#1f2833;
-  color:#66fcf1;
+  border-bottom:white black 5px;
+  border-radius:5px;
+  background-color:#565656;
+  color:#fff;
   padding:5px 20px 20px 20px;
 }
 
 input[type=text]{
-  background-color:antiquewhite;
 }
 
-input[type=submit],table th
+input[type=submit]
 {
-  background-color:#1f2833;
+  background-color:brown;
   color:#66fcf1;
 }
 
-td{
-  background-color:#c5c6c7;
+
+.btnRow
+{
+  margin-top:50px;
+  margin-left:20px;
+  margin-right:20px;
 }
 
 
 .btnLink
 {
   padding:30px;
-  
+  margin-bottom:20px;
+  border:solid black thin;
+  border-radius:5px;
+  color:white;
+  background-color:#454545;
 }
+
+/************************************************************************************************8
+ *                      TABLE STYLES
+ * ************************************************************************************************/
+
+table {  
+    color: #333;
+    width: 640px; 
+    border-collapse:collapse;
+}
+
+tr{
+
+}
+
+td, th {  
+    height: 30px; 
+}
+
+th {  
+    background:sienna;  /* Darken header a bit */
+    color:white;
+    text-align:center;
+    font-weight: bold;
+}
+
+td {  
+    background: #d7cec7;
+    text-align: center;
+}
+
+/* Cells in even rows (2,4,6...) are one color */        
+tr:nth-child(even) td { background: #f4decb; }   
+
+/* Cells in odd rows (1,3,5...) are another (excludes header cells)  */        
+tr:nth-child(odd) td { background: #f8eee7; }  
+

@@ -40,7 +40,7 @@ CREATE TABLE `book_master` (
 
 LOCK TABLES `book_master` WRITE;
 /*!40000 ALTER TABLE `book_master` DISABLE KEYS */;
-INSERT INTO `book_master` VALUES (1,'Learning PHP, MySQL and Javascript','Robin Nixon',2,'O Reilly Media','Computers',2018),(2,'C Programming Language','Brian W. Kernighan , Dennis M. Ritchie',5,'Prentice Hall','Computers',1988),(3,'The Hound of Baskervilles','Sir Arthor Conan Doyle',2,'Independent','Mystery',1990),(4,'The Story of my Life','Helen Keller',5,'Penguin','Autobiography',1996),(5,'Magic of Thinking Big','David J Schwartz',1,'Fireside','Non Fiction',1987),(6,'Networking All in one for Dummies','Doug Lowe',3,'For Dummies','Computers',2018),(7,'Wings of Fire ','APJ Abdul Kalam, Arun Tiwari',4,'Sangam Books','Biography',1999);
+INSERT INTO `book_master` VALUES (1,'Learning PHP, MySQL and Javascript','Robin Nixon',3,'O Reilly Media','Computers',2018),(2,'C Programming Language','Brian W. Kernighan , Dennis M. Ritchie',3,'Prentice Hall','Computers',1988),(3,'The Hound of Baskervilles','Sir Arthor Conan Doyle',1,'Independent','Mystery',1990),(4,'The Story of my Life','Helen Keller',5,'Penguin','Autobiography',1996),(5,'Magic of Thinking Big','David J Schwartz',0,'Fireside','Non Fiction',1987),(6,'Networking All in one for Dummies','Doug Lowe',3,'For Dummies','Computers',2018),(7,'Wings of Fire ','APJ Abdul Kalam, Arun Tiwari',4,'Sangam Books','Biography',1999),(100,'Test','TEst',100,'Test','test',2015);
 /*!40000 ALTER TABLE `book_master` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,7 +110,7 @@ CREATE TABLE `transaction` (
   `finePaid` decimal(5,2) DEFAULT NULL,
   `transClosed` int(11) DEFAULT NULL,
   PRIMARY KEY (`transId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +119,7 @@ CREATE TABLE `transaction` (
 
 LOCK TABLES `transaction` WRITE;
 /*!40000 ALTER TABLE `transaction` DISABLE KEYS */;
-INSERT INTO `transaction` VALUES (1,3,1,'2020-01-25','2020-02-05',4.00,1),(2,2,1,'2020-01-26','2020-02-15',100.00,1),(3,5,1,'2020-02-03','2020-02-05',0.00,1),(4,6,2,'2020-02-05','2020-02-15',100.00,1),(5,7,3,'2020-01-31',NULL,NULL,0),(6,1,3,'2019-06-24',NULL,NULL,0);
+INSERT INTO `transaction` VALUES (1,3,1,'2020-02-02',NULL,NULL,0),(2,7,2,'2020-02-15',NULL,NULL,0),(3,6,4,'2020-02-03','2020-02-18',8.00,1),(4,4,4,'2020-02-06','2020-02-18',5.00,1),(5,1,4,'2020-01-15','2020-02-18',27.00,1),(6,5,3,'2020-02-06',NULL,NULL,0),(7,2,3,'2020-02-10',NULL,NULL,0),(8,2,6,'2020-02-15',NULL,NULL,0);
 /*!40000 ALTER TABLE `transaction` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -132,4 +132,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-17 20:39:03
+-- Dump completed on 2020-02-18 22:23:16
